@@ -37,13 +37,11 @@ public class LL<E> implements Collection<E> {
     }
   }
   
-  public boolean remove(int index) {
-
-    if(this.size == 0)
-      return false;
+   public E remove(int index) {
+    if(this.size == 0) {
+      throw new NoSuchElementException("Error!");
+    }
     
-    
-
     Node cur = this.head;
     Node prev = null;
     
@@ -58,14 +56,14 @@ public class LL<E> implements Collection<E> {
       cur = cur.next;
       if(cur == null) {
         break;
-      }
+      } 
     }
-     prev.next = cur.next;
-     cur.next = null;
-     System.out.println(size+"-");
-     this.size--;
-     System.out.println(size);
-     return true;
+    E item = cur.data;
+    prev.next = cur.next;
+    cur.next = null;
+    this.size--;
+     
+    return item;
   }
   
   public boolean add(E item, int index) {
@@ -97,6 +95,28 @@ public class LL<E> implements Collection<E> {
 
   public int size() {
     return this.size;
+  }
+  
+  public E getData(int index) {
+    Node cur = this.head;
+    for(int i = 0; i < index; i++) {
+      cur = cur.next;
+      if(cur == null) {
+        break;
+      } 
+    }
+    E item = cur.data;
+    return item;
+  }
+  
+  public void display() {
+    Node cur = this.head;
+    int ctr = 0;
+    while(cur != null){
+      System.out.println("stack" + ctr + ": " + cur.data);
+      cur = cur.next;
+      ctr++;
+    }
   }
 
   
